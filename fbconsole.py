@@ -2,7 +2,7 @@ import framebuf
 import uio
 import dos_font as font
 import st7789
-import time
+import os
 
 class FBConsole(uio.IOBase):
     def __init__(self, fb, bgcolor=0, fgcolor=-1, width=-1, height=-1, readobj=None):
@@ -29,7 +29,22 @@ class FBConsole(uio.IOBase):
         self.line_height(16)
         self.voffset = 0
         self.bottom_mark=False
+        self._n = 0
+        self._c = b'x'
         self.cls()
+    
+    def _press(self):
+        self._n += 1
+        if hasattr(os, "dupterm_notify"):
+            os.dupterm_notify(None)
+    
+
+    def readinto(self, buf):
+        n = min(len(buf), self._n)
+        for i in range(n):
+            buf[i:i+1] = self._c
+        self._n -= n
+        return None if n == 0 else n
 
     def cls(self):
         self.x = 0
@@ -93,13 +108,6 @@ class FBConsole(uio.IOBase):
             i += 1
         self._draw_cursor(self.fgcolor)
         return len(buf)
-    
-
-    def readinto(self, buf, nbytes=0):
-        if self.readobj != None:
-            return self.readobj.readinto(buf, nbytes)
-        else:
-            return None
         
     def _newline(self):
         #self.fb.tft.vscrdef(0,self.height,self.lineheight)

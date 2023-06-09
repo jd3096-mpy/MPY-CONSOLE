@@ -1,15 +1,13 @@
-import random
-import utime
 import st7789
 import tft_config
 import framebuf
-from machine import Pin
-import sys
-from machine import SoftI2C,Pin,UART
+from machine import SoftI2C,Pin,UART,Timer
 import time
-import _thread
-import machine
 
+power=Pin(10,Pin.OUT)
+power.on()
+
+bt=Pin(0)
 
 class SCREEN():
     def __init__(self, width, height):
@@ -18,14 +16,10 @@ class SCREEN():
         self.height = height
         self.tft.init()
         self.tft.fill(0)
-
-
 screen=SCREEN(320,240)
 
-# screen.tft.jpg('logo.jpg',0,0)
-# time.sleep(2)
-# screen.fb.text('oh houw',10, 10,222)
-# screen.show()
+kb=SoftI2C(scl=Pin(8),sda=Pin(18))
+KB_ADDR=0x55
 
 
 from fbconsole import FBConsole
@@ -33,3 +27,16 @@ import os
 scr = FBConsole(screen,bgcolor=st7789.color565(10, 27, 15),fgcolor=st7789.color565(66, 234, 71))
 os.dupterm(scr)        # redirect REPL output to OLED
 print('MPY CONSOLE by jd3096')
+time.sleep(0.5)
+
+def check_key(t):
+    re=kb.readfrom(KB_ADDR, 1)
+    if re!=b'\x00':
+        scr._c=re
+        scr._press()
+    
+tim=Timer(0)
+tim.init(mode=Timer.PERIODIC, period=10, callback=check_key)
+
+
+
