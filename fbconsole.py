@@ -122,7 +122,6 @@ class FBConsole(uio.IOBase):
 #             self.voffset %= self.height
 #             self.fb.tft.vscsad(self.voffset)
 #             self.fb.tft.fill_rect(0, self.voffset - self.lineheight, self.width, self.lineheight, self.bgcolor)
-#             #################
 #             #self.y = self.h - 1
 #             self.y = self.voffset - 16
         self.y_end = self.y
@@ -134,6 +133,7 @@ class FBConsole(uio.IOBase):
                 self.x = self.w - 1
         else:
             self.x -= 1
+            self.fb.tft.fill_rect(self.x*self.char_x,self.y*self.char_y,self.char_x, self.char_y, self.bgcolor)
 
     def _clear_cursor_eol(self):
         self.fb.tft.fill_rect(self.x * self.char_x, self.y * self.lineheight, self.width, self.lineheight, self.bgcolor)
