@@ -24,8 +24,8 @@ KB_ADDR=0x55
 
 from fbconsole import FBConsole
 import os
-scr = FBConsole(screen,bgcolor=st7789.color565(10, 27, 15),fgcolor=st7789.color565(66, 234, 71))
-os.dupterm(scr)        # redirect REPL output to OLED
+scr = FBConsole(screen,bgcolor=0,fgcolor=st7789.color565(66, 234, 71))
+os.dupterm(scr)   
 print('MPY CONSOLE by jd3096')
 time.sleep(0.5)
 

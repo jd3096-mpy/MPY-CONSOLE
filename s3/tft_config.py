@@ -9,12 +9,12 @@ BFA = 0
 
 def config(rotation=0, buffer_size=0, options=0):
     return st7789.ST7789(
-        SPI(1, baudrate=24000000, sck=Pin(40), mosi=Pin(41)),
+        SPI(2, baudrate=24000000, sck=Pin(41), mosi=Pin(37)),
         240,
         320,
-        cs=Pin(12, Pin.OUT),
-        dc=Pin(11, Pin.OUT),
-        backlight=Pin(42, Pin.OUT),
+        cs=Pin(39, Pin.OUT),
+        dc=Pin(40, Pin.OUT),
+        backlight=Pin(36, Pin.OUT),
         rotation=1,
         color_order=st7789.RGB,
         inversion=False,

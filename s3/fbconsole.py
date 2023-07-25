@@ -35,8 +35,8 @@ class FBConsole(uio.IOBase):
     
     def _press(self):
         self._n += 1
-        if hasattr(os, "dupterm_notify"):
-            os.dupterm_notify(None)
+        os.dupterm_notify(None)
+        
     
 
     def readinto(self, buf):
