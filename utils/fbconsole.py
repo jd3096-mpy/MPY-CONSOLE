@@ -1,11 +1,11 @@
 import framebuf
 import uio
-import dos_font as font
+import utils.dos_font as font
 import st7789
 import os
 
 class FBConsole(uio.IOBase):
-    def __init__(self, fb, bgcolor=0, fgcolor=-1, width=-1, height=-1, readobj=None):
+    def __init__(self, fb, bg_color=0, fg_color=-1, width=-1, height=-1, readobj=None):
         self.readobj = readobj
         self.fb = fb
         if width > 0:
@@ -22,8 +22,8 @@ class FBConsole(uio.IOBase):
                 self.height=fb.height
             except:
                 raise ValueError
-        self.bgcolor = bgcolor
-        self.fgcolor = fgcolor
+        self.bgcolor = bg_color
+        self.fgcolor = fg_color
         self.char_x=8
         self.char_y=16
         self.line_height(16)

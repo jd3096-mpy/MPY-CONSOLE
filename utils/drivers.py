@@ -1,3 +1,26 @@
+#ST7789
+from machine import Pin, SPI, freq
+import st7789
+
+class SCREEN():
+    def __init__(self, width, height):
+        self.tft=st7789.ST7789(
+        SPI(2, baudrate=20000000, sck=Pin(41), mosi=Pin(38)),
+        height,
+        width,
+        cs=Pin(39, Pin.OUT),
+        dc=Pin(40, Pin.OUT),
+        backlight=Pin(36, Pin.OUT),
+        reset=Pin(42, Pin.OUT),
+        rotation=3,
+        color_order=st7789.RGB,
+        inversion=False)
+        self.width = width
+        self.height = height
+        self.tft.init()
+        self.tft.fill(0)
+
+#BC6561 KEYBOARD
 from machine import UART,Pin
 import time
 
@@ -14,8 +37,6 @@ key_map_sym={
 4:None,12:b'7',11:b'8',19:b'9',18:b'?',25:b'!',26:b',',33:b'.',32:b'$',24:b'\n',
 13:b'import',6:b'0',5:b' ',2:b'sym',17:None,
     }
-
-
 
 class KEYBOARD():
     def __init__(self):
@@ -48,3 +69,6 @@ class KEYBOARD():
 
             
     
+
+
+
