@@ -38,7 +38,6 @@ class FBConsole(uio.IOBase):
         os.dupterm_notify(None)
         
     
-
     def readinto(self, buf):
         n = min(len(buf), self._n)
         for i in range(n):
