@@ -19,11 +19,11 @@ COLOR_EVA={
 }
 
 #diaglo test
-scr=SCREEN(320,240).tft
-theme=COLOR_EVA
-scr.init()
-scr.rect(30, 30, 200, 100, theme['border'])
-scr.fill_rect(32, 32, 196, 96, theme['bg'])
-scr.fill_rect(32, 50, 196, 3, theme['border'])
-scr.write(font,'TITLE',80,33,theme['font'],theme['bg'])
+# scr=SCREEN(320,240).tft
+# theme=COLOR_EVA
+# scr.init()
+# scr.rect(30, 30, 200, 100, theme['border'])
+# scr.fill_rect(32, 32, 196, 96, theme['bg'])
+# scr.fill_rect(32, 50, 196, 3, theme['border'])
+# scr.write(font,'TITLE',80,33,theme['font'],theme['bg'])
 
