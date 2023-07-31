@@ -34,6 +34,7 @@ tim.init(mode=Timer.PERIODIC, period=3, callback=check_key)
 print('Enter the filename you want to run:')
 file=input()+'.py'
 err=0
+tim.deinit()
 try:
     exec(open('./app/'+file).read())
 except OSError as e:
