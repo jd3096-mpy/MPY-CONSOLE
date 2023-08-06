@@ -14,7 +14,8 @@ class SCREEN():
         reset=Pin(42, Pin.OUT),
         rotation=3,
         color_order=st7789.RGB,
-        inversion=False)
+        inversion=True,
+        half_duplex=False)
         self.width = width
         self.height = height
         self.tft.init()
